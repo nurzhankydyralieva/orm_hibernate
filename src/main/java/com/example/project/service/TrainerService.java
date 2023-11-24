@@ -39,5 +39,11 @@ public class TrainerService {
     public void updatePassword(int id, String password) {
         trainerDAO.updatePassword(id, password);
     }
+    public void activateTrainer(int id) {
+        trainerDAO.activateTrainer(id);
+    }
+    public void deactivateTrainer(int id) {
+        trainerDAO.deactivateTrainer(id);
+    }
 
 }

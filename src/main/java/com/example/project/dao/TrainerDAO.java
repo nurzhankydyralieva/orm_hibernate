@@ -76,4 +76,20 @@ public class TrainerDAO {
         updatedPassword.setParameter("password", password);
         updatedPassword.executeUpdate();
     }
+    @Transactional
+    public void activateTrainer(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "UPDATE User u SET u.isActive = true WHERE u.id =(SELECT t.user.id FROM Trainer t WHERE t.user.id =:id)";
+        Query activated = session.createQuery(query);
+        activated.setParameter("id", id);
+        activated.executeUpdate();
+    }
+    @Transactional
+    public void deactivateTrainer(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "UPDATE User u SET u.isActive = false WHERE u.id =(SELECT t.user.id FROM Trainer t WHERE t.user.id =:id)";
+        Query activated = session.createQuery(query);
+        activated.setParameter("id", id);
+        activated.executeUpdate();
+    }
 }

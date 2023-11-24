@@ -56,3 +56,13 @@ CREATE TABLE users_trainer
     FOREIGN KEY (trainer_id) REFERENCES trainer (trainer_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+DROP TABLE IF EXISTS users_trainee;
+CREATE TABLE users_trainee
+(
+    trainee_id        INTEGER,
+    user_id INTEGER,
+    PRIMARY KEY (trainee_id, user_id),
+    FOREIGN KEY (trainee_id) REFERENCES trainee (trainee_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+);

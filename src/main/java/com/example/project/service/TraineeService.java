@@ -33,4 +33,10 @@ public class TraineeService {
     public void updatePassword(int id, String password) {
         traineeDAO.updatePassword(id,password);
     }
+    public void activateTrainee(int id) {
+        traineeDAO.activateTrainee(id);
+    }
+    public void deactivateTrainee(int id) {
+        traineeDAO.deactivateTrainee(id);
+    }
 }

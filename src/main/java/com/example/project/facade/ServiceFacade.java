@@ -53,6 +53,13 @@ public class ServiceFacade {
         traineeService.updatePassword(id, password);
     }
 
+    public void activateTrainee(int id) {
+        traineeService.activateTrainee(id);
+    }
+    public void deactivateTrainee(int id) {
+        traineeService.deactivateTrainee(id);
+    }
+
     public void createTrainer(Trainer trainer) {
         trainerService.createTrainer(trainer);
     }
@@ -79,6 +86,13 @@ public class ServiceFacade {
 
     public void updateTrainerPassword(int id, String password) {
         trainerService.updatePassword(id, password);
+    }
+
+    public void activateTrainer(int id) {
+        trainerService.activateTrainer(id);
+    }
+    public void deactivateTrainer(int id) {
+        trainerService.deactivateTrainer(id);
     }
 
     public void createUser(User user) {

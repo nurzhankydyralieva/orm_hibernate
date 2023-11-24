@@ -1,7 +1,6 @@
 package com.example.project.dao;
 
 import com.example.project.entity.Trainee;
-import com.example.project.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +20,7 @@ public class TraineeDAO {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT t FROM Trainee t", Trainee.class).getResultList();
     }
+
     @Transactional
     public Trainee selectTraineeByUserName(String userName) {
         Session session = sessionFactory.getCurrentSession();
@@ -54,14 +54,32 @@ public class TraineeDAO {
         trainee.setDateOfBirth(updatedTrainee.getDateOfBirth());
         trainee.setUser(updatedTrainee.getUser());
     }
+
     @Transactional
     public void updatePassword(int id, String password) {
         Session session = sessionFactory.getCurrentSession();
-        String query = "update User u set u.password=:password where u.id =(select t.user.id from Trainee t where t.user.id =:id)";
+        String query = "UPDATE User u SET u.password=:password WHERE u.id =(SELECT t.user.id FROM Trainee t WHERE t.user.id =:id)";
         Query updatedPassword = session.createQuery(query);
         updatedPassword.setParameter("id", id);
         updatedPassword.setParameter("password", password);
         updatedPassword.executeUpdate();
+    }
+
+    @Transactional
+    public void activateTrainee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "UPDATE User u SET u.isActive = true WHERE u.id =(SELECT t.user.id FROM Trainee t WHERE t.user.id =:id)";
+        Query activated = session.createQuery(query);
+        activated.setParameter("id", id);
+        activated.executeUpdate();
+    }
+    @Transactional
+    public void deactivateTrainee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "UPDATE User u SET u.isActive = false WHERE u.id =(SELECT t.user.id FROM Trainee t WHERE t.user.id =:id)";
+        Query activated = session.createQuery(query);
+        activated.setParameter("id", id);
+        activated.executeUpdate();
     }
 
 }
