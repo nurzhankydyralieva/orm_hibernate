@@ -36,7 +36,8 @@ public class Main {
         //  facade.deleteTrainerByUserName("Tom");
         // facade.updateTrainerPassword(1,"8888");
         //facade.activateTrainer(2);
-       // facade.deactivateTrainer(2);
+        // facade.deactivateTrainer(2);
+        facade.selectUserNameAndPasswordTrainer("Tom","333");
 
 
         var trainee = Trainee.builder().dateOfBirth(new Date()).address("Kyrgyzstan").user(new User(1)).build();
@@ -48,7 +49,8 @@ public class Main {
         //  System.out.println(facade.selectTraineeByUserName("Katy"));
         // facade.updateTraineePassword(1,"trainee");
         //facade.activateTrainee(1);
-        facade.deactivateTrainee(1);
+        //facade.deactivateTrainee(1);
+        facade.selectUserNameAndPasswordTrainee("Tom","333");
 
 
         var training = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Dance")

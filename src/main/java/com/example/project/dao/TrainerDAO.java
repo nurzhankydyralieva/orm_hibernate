@@ -1,5 +1,6 @@
 package com.example.project.dao;
 
+import com.example.project.entity.Trainee;
 import com.example.project.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
@@ -91,5 +92,20 @@ public class TrainerDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+    }
+    @Transactional
+    public Trainer selectUserNameAndPassword(String userName, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "SELECT t FROM Trainer t WHERE t.user.userName =:userName AND t.user.password =:password";
+        Query userNameAndPassword = session.createQuery(query);
+        userNameAndPassword.setParameter("userName", userName);
+        userNameAndPassword.setParameter("password", password);
+
+        Trainer trainer = (Trainer) userNameAndPassword.uniqueResult();
+
+        if (trainer != null) {
+            LOGGER.info("Trainer's user name and password is: " + trainer.getUser().getUserName() + "." + trainer.getUser().getPassword());
+        }
+        return trainer;
     }
 }

@@ -27,16 +27,24 @@ public class TraineeService {
     public void updateTrainee(int id, Trainee updatedTrainee) {
         traineeDAO.updateTrainee(id, updatedTrainee);
     }
+
     public Trainee selectTraineeByUserName(String userName) {
         return traineeDAO.selectTraineeByUserName(userName);
     }
+
     public void updatePassword(int id, String password) {
-        traineeDAO.updatePassword(id,password);
+        traineeDAO.updatePassword(id, password);
     }
+
     public void activateTrainee(int id) {
         traineeDAO.activateTrainee(id);
     }
+
     public void deactivateTrainee(int id) {
         traineeDAO.deactivateTrainee(id);
+    }
+
+    public Trainee selectUserNameAndPassword(String userName, String password) {
+        return traineeDAO.selectUserNameAndPassword(userName, password);
     }
 }

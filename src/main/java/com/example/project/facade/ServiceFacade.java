@@ -56,6 +56,7 @@ public class ServiceFacade {
     public void activateTrainee(int id) {
         traineeService.activateTrainee(id);
     }
+
     public void deactivateTrainee(int id) {
         traineeService.deactivateTrainee(id);
     }
@@ -91,8 +92,13 @@ public class ServiceFacade {
     public void activateTrainer(int id) {
         trainerService.activateTrainer(id);
     }
+
     public void deactivateTrainer(int id) {
         trainerService.deactivateTrainer(id);
+    }
+
+    public Trainer selectUserNameAndPasswordTrainer(String userName, String password) {
+        return trainerService.selectUserNameAndPassword(userName, password);
     }
 
     public void createUser(User user) {
@@ -122,4 +128,10 @@ public class ServiceFacade {
     public void updateSpecialization(int id, Specialization updatedSpecialization) {
         specializationService.updateSpecialization(id, updatedSpecialization);
     }
+
+    public Trainee selectUserNameAndPasswordTrainee(String userName, String password) {
+        return traineeService.selectUserNameAndPassword(userName, password);
+    }
+
+
 }

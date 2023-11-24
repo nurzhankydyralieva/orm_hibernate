@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TraineeDAO {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrainerDAO.class);
     private final SessionFactory sessionFactory;
 
     @Transactional(readOnly = true)
@@ -73,6 +76,7 @@ public class TraineeDAO {
         activated.setParameter("id", id);
         activated.executeUpdate();
     }
+
     @Transactional
     public void deactivateTrainee(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -80,6 +84,21 @@ public class TraineeDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+    }
+    @Transactional
+    public Trainee selectUserNameAndPassword(String userName, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "SELECT t FROM Trainee t WHERE t.user.userName =:userName AND t.user.password =:password";
+        Query userNameAndPassword = session.createQuery(query);
+        userNameAndPassword.setParameter("userName", userName);
+        userNameAndPassword.setParameter("password", password);
+
+        Trainee trainee = (Trainee) userNameAndPassword.uniqueResult();
+
+        if (trainee != null) {
+            LOGGER.info("Trainee's user name and password is: " + trainee.getUser().getUserName() + "." + trainee.getUser().getPassword());
+        }
+        return trainee;
     }
 
 }
