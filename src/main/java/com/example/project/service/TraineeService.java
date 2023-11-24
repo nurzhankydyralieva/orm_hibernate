@@ -30,4 +30,7 @@ public class TraineeService {
     public Trainee selectTraineeByUserName(String userName) {
         return traineeDAO.selectTraineeByUserName(userName);
     }
+    public void updatePassword(int id, String password) {
+        traineeDAO.updatePassword(id,password);
+    }
 }

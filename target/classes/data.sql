@@ -47,12 +47,12 @@ CREATE TABLE training_type
 );
 
 
-DROP TABLE IF EXISTS trainer_specialization;
-CREATE TABLE trainer_specialization
+DROP TABLE IF EXISTS users_trainer;
+CREATE TABLE users_trainer
 (
     trainer_id        INTEGER,
-    specialization_id INTEGER,
-    PRIMARY KEY (trainer_id, specialization_id),
+    user_id INTEGER,
+    PRIMARY KEY (trainer_id, user_id),
     FOREIGN KEY (trainer_id) REFERENCES trainer (trainer_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (specialization_id) REFERENCES specialization (specialization_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

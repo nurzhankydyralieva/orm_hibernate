@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TrainerDAO {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrainerDAO.class);
     private final SessionFactory sessionFactory;
 
     @Transactional(readOnly = true)
@@ -25,9 +28,20 @@ public class TrainerDAO {
     public Trainer selectTrainerByUserName(String userName) {
         Session session = sessionFactory.getCurrentSession();
         String query = "SELECT t FROM Trainer t WHERE t.user.userName =:userName";
-        Query<Trainer> sessionQuery = session.createQuery(query, Trainer.class);
-        sessionQuery.setParameter("userName", userName);
-        return sessionQuery.getSingleResult();
+        Query<Trainer> selectedUserName = session.createQuery(query, Trainer.class);
+        selectedUserName.setParameter("userName", userName);
+        return selectedUserName.getSingleResult();
+    }
+
+    @Transactional
+    public void deleteTrainerByUserName(String userName) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainer trainer = selectTrainerByUserName(userName);
+
+        if (trainer != null) {
+            session.remove(trainer);
+            LOGGER.info("Trainer deleted by User Name");
+        }
     }
 
     @Transactional(readOnly = true)
@@ -53,4 +67,13 @@ public class TrainerDAO {
         trainer.setSpecialization(updatedTrainer.getSpecialization());
     }
 
+    @Transactional
+    public void updatePassword(int id, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "update User u set u.password=:password where u.id =(select t.user.id from Trainer t where t.user.id =:id)";
+        Query updatedPassword = session.createQuery(query);
+        updatedPassword.setParameter("id", id);
+        updatedPassword.setParameter("password", password);
+        updatedPassword.executeUpdate();
+    }
 }

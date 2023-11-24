@@ -54,5 +54,14 @@ public class TraineeDAO {
         trainee.setDateOfBirth(updatedTrainee.getDateOfBirth());
         trainee.setUser(updatedTrainee.getUser());
     }
+    @Transactional
+    public void updatePassword(int id, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "update User u set u.password=:password where u.id =(select t.user.id from Trainee t where t.user.id =:id)";
+        Query updatedPassword = session.createQuery(query);
+        updatedPassword.setParameter("id", id);
+        updatedPassword.setParameter("password", password);
+        updatedPassword.executeUpdate();
+    }
 
 }

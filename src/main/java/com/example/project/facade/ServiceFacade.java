@@ -44,8 +44,13 @@ public class ServiceFacade {
     public void updateTrainee(int id, Trainee updatedTrainee) {
         traineeService.updateTrainee(id, updatedTrainee);
     }
+
     public Trainee selectTraineeByUserName(String userName) {
         return traineeService.selectTraineeByUserName(userName);
+    }
+
+    public void updateTraineePassword(int id, String password) {
+        traineeService.updatePassword(id, password);
     }
 
     public void createTrainer(Trainer trainer) {
@@ -60,12 +65,22 @@ public class ServiceFacade {
         return trainerService.selectTrainerById(id);
     }
 
+    public void deleteTrainerByUserName(String userName) {
+        trainerService.deleteTrainerByUserName(userName);
+    }
+
     public void updateTrainer(int id, Trainer updatedTrainer) {
         trainerService.updateTrainer(id, updatedTrainer);
     }
+
     public Trainer selectTrainerByUserName(String userName) {
         return trainerService.selectTrainerByUserName(userName);
     }
+
+    public void updateTrainerPassword(int id, String password) {
+        trainerService.updatePassword(id, password);
+    }
+
     public void createUser(User user) {
         userService.createUser(user);
     }

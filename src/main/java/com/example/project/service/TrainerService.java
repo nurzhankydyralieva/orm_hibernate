@@ -32,4 +32,12 @@ public class TrainerService {
         return trainerDAO.selectTrainerByUserName(userName);
     }
 
+    public void deleteTrainerByUserName(String userName) {
+        trainerDAO.deleteTrainerByUserName(userName);
+    }
+
+    public void updatePassword(int id, String password) {
+        trainerDAO.updatePassword(id, password);
+    }
+
 }
