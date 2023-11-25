@@ -16,6 +16,7 @@ public class ServiceFacade {
     private final UserService userService;
     private final TraineeService traineeService;
     private final TrainingService trainingService;
+    private  final TrainingTypeService trainingTypeService;
 
     public void createTraining(Training training) {
         trainingService.createTraining(training);
@@ -27,6 +28,10 @@ public class ServiceFacade {
 
     public Training selectTrainingById(int id) {
         return trainingService.selectTrainingById(id);
+    }
+
+    public void updateTraining(int id, Training updatedTraining) {
+        trainingService.updateTraining(id, updatedTraining);
     }
 
     public void createTrainee(Trainee trainee) {
@@ -59,6 +64,18 @@ public class ServiceFacade {
 
     public void deactivateTrainee(int id) {
         traineeService.deactivateTrainee(id);
+    }
+
+    public void deleteTraineeByUserName(String userName) {
+        traineeService.deleteTraineeByUserName(userName);
+    }
+
+    public List<Training> selectTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria) {
+        return traineeService.selectTraineeTrainingListByTraineeUserNameAndCriteria(userName, criteria);
+    }
+
+    public void deleteTrainee(int id) {
+        traineeService.deleteTrainee(id);
     }
 
     public void createTrainer(Trainer trainer) {
@@ -97,8 +114,16 @@ public class ServiceFacade {
         trainerService.deactivateTrainer(id);
     }
 
+    public List<Trainer> selectActiveTrainersList(int id) {
+        return trainerService.getActiveTrainersList(id);
+    }
+
     public Trainer selectUserNameAndPasswordTrainer(String userName, String password) {
         return trainerService.selectUserNameAndPassword(userName, password);
+    }
+
+    public List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria) {
+        return trainerService.selectTrainerTrainingListByTrainerUserNameAndCriteria(userName, criteria);
     }
 
     public void createUser(User user) {
@@ -133,5 +158,12 @@ public class ServiceFacade {
         return traineeService.selectUserNameAndPassword(userName, password);
     }
 
+    public void createTrainingType(TrainingType trainingType) {
+        trainingTypeService.createTrainingType(trainingType);
+    }
+
+    public void updateTrainingType(int id, TrainingType updatedTraining) {
+        trainingTypeService.updateTrainingType(id, updatedTraining);
+    }
 
 }

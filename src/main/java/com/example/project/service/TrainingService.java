@@ -23,4 +23,8 @@ public class TrainingService {
     public Training selectTrainingById(int id) {
         return trainingDAO.showTraining(id);
     }
+
+    public void updateTraining(int id, Training updatedTraining) {
+        trainingDAO.updateTraining(id, updatedTraining);
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.project.dao;
 
-import com.example.project.entity.Trainee;
 import com.example.project.entity.Trainer;
+import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +22,7 @@ public class TrainerDAO {
     @Transactional(readOnly = true)
     public List<Trainer> selectAllTrainers() {
         Session session = sessionFactory.getCurrentSession();
+        LOGGER.info("Selected all Trainers");
         return session.createQuery("SELECT t FROM Trainer t", Trainer.class).getResultList();
     }
 
@@ -31,6 +32,7 @@ public class TrainerDAO {
         String query = "SELECT t FROM Trainer t WHERE t.user.userName =:userName";
         Query<Trainer> selectedUserName = session.createQuery(query, Trainer.class);
         selectedUserName.setParameter("userName", userName);
+        LOGGER.info("Selected Trainer by user name");
         return selectedUserName.getSingleResult();
     }
 
@@ -41,13 +43,14 @@ public class TrainerDAO {
 
         if (trainer != null) {
             session.remove(trainer);
-            LOGGER.info("Trainer deleted by User Name");
+            LOGGER.info("Trainer is deleted by User Name");
         }
     }
 
     @Transactional(readOnly = true)
     public Trainer showTrainer(int id) {
         Session session = sessionFactory.getCurrentSession();
+        LOGGER.info("Selected Trainer by id");
         return session.get(Trainer.class, id);
     }
 
@@ -58,6 +61,7 @@ public class TrainerDAO {
         saveTrainer.setSpecialization(trainer.getSpecialization());
         saveTrainer.setUser(trainer.getUser());
         session.save(trainer);
+        LOGGER.info("Trainer is created");
     }
 
     @Transactional
@@ -66,6 +70,7 @@ public class TrainerDAO {
         Trainer trainer = session.get(Trainer.class, id);
         trainer.setUser(updatedTrainer.getUser());
         trainer.setSpecialization(updatedTrainer.getSpecialization());
+        LOGGER.info("Trainer is updated");
     }
 
     @Transactional
@@ -76,7 +81,9 @@ public class TrainerDAO {
         updatedPassword.setParameter("id", id);
         updatedPassword.setParameter("password", password);
         updatedPassword.executeUpdate();
+        LOGGER.info("Trainer's password is updated");
     }
+
     @Transactional
     public void activateTrainer(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -84,7 +91,9 @@ public class TrainerDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+        LOGGER.info("Trainer is activated");
     }
+
     @Transactional
     public void deactivateTrainer(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -92,7 +101,9 @@ public class TrainerDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+        LOGGER.info("Trainer is deactivated");
     }
+
     @Transactional
     public Trainer selectUserNameAndPassword(String userName, String password) {
         Session session = sessionFactory.getCurrentSession();
@@ -107,5 +118,25 @@ public class TrainerDAO {
             LOGGER.info("Trainer's user name and password is: " + trainer.getUser().getUserName() + "." + trainer.getUser().getPassword());
         }
         return trainer;
+    }
+
+    @Transactional
+    public List<Training> getTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "SELECT t FROM Trainer tr JOIN tr.user u JOIN tr.trainings t WHERE u.userName = :userName AND u.criteria = :criteria";
+
+        LOGGER.info("Get Trainer Training List by Trainer userName and criteria");
+        return session.createQuery(query, Training.class)
+                .setParameter("userName", userName)
+                .setParameter("criteria", criteria)
+                .getResultList();
+    }
+
+    @Transactional
+    public List<Trainer> getActiveTrainersList(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "SELECT u FROM User u WHERE u.isActive=true AND u.id =(SELECT t.user.id FROM Trainer t WHERE t.user.id =:id)";
+        return session.createQuery(query, Trainer.class)
+                .setParameter("id", id).getResultList();
     }
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,9 +19,9 @@ public class Specialization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "specialization_id")
     private Integer id;
+    @NotEmpty(message = "Specialization should not be empty")
     @Column(name = "speciality")
     private String speciality;
-
 
     public Specialization(Integer id) {
         this.id = id;

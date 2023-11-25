@@ -1,6 +1,7 @@
 package com.example.project.dao;
 
 import com.example.project.entity.Trainee;
+import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +22,7 @@ public class TraineeDAO {
     @Transactional(readOnly = true)
     public List<Trainee> selectAllTrainees() {
         Session session = sessionFactory.getCurrentSession();
+        LOGGER.info("All trainees are selected");
         return session.createQuery("SELECT t FROM Trainee t", Trainee.class).getResultList();
     }
 
@@ -30,12 +32,14 @@ public class TraineeDAO {
         String query = "SELECT t FROM Trainee t WHERE t.user.userName =:userName";
         Query<Trainee> sessionQuery = session.createQuery(query, Trainee.class);
         sessionQuery.setParameter("userName", userName);
+        LOGGER.info("Trainee is selected by user name");
         return sessionQuery.getSingleResult();
     }
 
     @Transactional(readOnly = true)
     public Trainee selectTraineeById(int id) {
         Session session = sessionFactory.getCurrentSession();
+        LOGGER.info("Trainee is selected by id");
         return session.get(Trainee.class, id);
     }
 
@@ -46,7 +50,8 @@ public class TraineeDAO {
         newTrainee.setAddress(trainee.getAddress());
         newTrainee.setDateOfBirth(trainee.getDateOfBirth());
         newTrainee.setUser(trainee.getUser());
-        session.save(newTrainee);
+        session.save(trainee);
+        LOGGER.info("Trainee is created");
     }
 
     @Transactional
@@ -56,6 +61,7 @@ public class TraineeDAO {
         trainee.setAddress(updatedTrainee.getAddress());
         trainee.setDateOfBirth(updatedTrainee.getDateOfBirth());
         trainee.setUser(updatedTrainee.getUser());
+        LOGGER.info("Trainee is updated");
     }
 
     @Transactional
@@ -66,6 +72,7 @@ public class TraineeDAO {
         updatedPassword.setParameter("id", id);
         updatedPassword.setParameter("password", password);
         updatedPassword.executeUpdate();
+        LOGGER.info("Trainee's password is updated");
     }
 
     @Transactional
@@ -75,6 +82,7 @@ public class TraineeDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+        LOGGER.info("Trainee is activated");
     }
 
     @Transactional
@@ -84,7 +92,9 @@ public class TraineeDAO {
         Query activated = session.createQuery(query);
         activated.setParameter("id", id);
         activated.executeUpdate();
+        LOGGER.info("Trainee is deactivated");
     }
+
     @Transactional
     public Trainee selectUserNameAndPassword(String userName, String password) {
         Session session = sessionFactory.getCurrentSession();
@@ -101,4 +111,32 @@ public class TraineeDAO {
         return trainee;
     }
 
+    @Transactional
+    public void deleteTraineeByUserName(String userName) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainee trainee = selectTraineeByUserName(userName);
+
+        if (trainee != null) {
+            session.remove(trainee);
+            LOGGER.info("Trainee is deleted by User Name");
+        }
+    }
+
+    @Transactional
+    public void deleteTrainee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(session.get(Trainee.class, id));
+        LOGGER.info("Trainee is deleted");
+    }
+
+    @Transactional
+    public List<Training> getTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria) {
+        Session session = sessionFactory.getCurrentSession();
+        String query = "SELECT t FROM Trainee tr JOIN tr.user u JOIN tr.trainings t WHERE u.userName = :userName AND u.criteria = :criteria";
+        LOGGER.info("Get Trainee Training List by Trainee userName and criteria");
+        return session.createQuery(query, Training.class)
+                .setParameter("userName", userName)
+                .setParameter("criteria", criteria)
+                .getResultList();
+    }
 }

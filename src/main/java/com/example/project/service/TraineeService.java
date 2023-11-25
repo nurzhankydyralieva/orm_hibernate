@@ -2,6 +2,7 @@ package com.example.project.service;
 
 import com.example.project.dao.TraineeDAO;
 import com.example.project.entity.Trainee;
+import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -46,5 +47,17 @@ public class TraineeService {
 
     public Trainee selectUserNameAndPassword(String userName, String password) {
         return traineeDAO.selectUserNameAndPassword(userName, password);
+    }
+
+    public void deleteTraineeByUserName(String userName) {
+        traineeDAO.deleteTraineeByUserName(userName);
+    }
+
+    public List<Training> selectTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria) {
+        return traineeDAO.getTraineeTrainingListByTraineeUserNameAndCriteria(userName, criteria);
+    }
+
+    public void deleteTrainee(int id) {
+        traineeDAO.deleteTrainee(id);
     }
 }

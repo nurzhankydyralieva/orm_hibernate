@@ -2,6 +2,7 @@ package com.example.project.service;
 
 import com.example.project.dao.TrainerDAO;
 import com.example.project.entity.Trainer;
+import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,14 @@ public class TrainerService {
 
     public Trainer selectUserNameAndPassword(String userName, String password) {
         return trainerDAO.selectUserNameAndPassword(userName, password);
+    }
+
+    public List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria) {
+        return trainerDAO.getTrainerTrainingListByTrainerUserNameAndCriteria(userName, criteria);
+    }
+
+    public List<Trainer> getActiveTrainersList(int id) {
+        return trainerDAO.getActiveTrainersList(id);
     }
 
 }
