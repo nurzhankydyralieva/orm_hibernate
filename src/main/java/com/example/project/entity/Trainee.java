@@ -45,5 +45,4 @@ public class Trainee {
     public Trainee(Integer id) {
         this.id = id;
     }
-
 }

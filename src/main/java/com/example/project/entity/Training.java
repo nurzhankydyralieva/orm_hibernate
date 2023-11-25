@@ -42,5 +42,4 @@ public class Training {
     @NotEmpty(message = "Training duration should not be empty")
     @Column(name = "training_duration")
     private Number trainingDuration;
-
 }

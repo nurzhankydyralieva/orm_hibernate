@@ -47,5 +47,4 @@ public class Trainer {
     public Trainer(Integer id) {
         this.id = id;
     }
-
 }

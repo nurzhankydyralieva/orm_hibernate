@@ -2,11 +2,13 @@ package com.example.project.service;
 
 import com.example.project.dao.TraineeDAO;
 import com.example.project.entity.Trainee;
+import com.example.project.entity.Trainer;
 import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -59,5 +61,9 @@ public class TraineeService {
 
     public void deleteTrainee(int id) {
         traineeDAO.deleteTrainee(id);
+    }
+
+    public void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers) {
+        traineeDAO.updateTraineeTrainerList(updateTraineeId, trainers);
     }
 }

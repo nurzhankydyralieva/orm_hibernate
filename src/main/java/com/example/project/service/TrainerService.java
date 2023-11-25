@@ -60,5 +60,4 @@ public class TrainerService {
     public List<Trainer> getActiveTrainersList(int id) {
         return trainerDAO.getActiveTrainersList(id);
     }
-
 }

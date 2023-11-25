@@ -23,4 +23,13 @@ public class UserService {
     public User selectUserById(int id) {
         return userDAO.showUserById(id);
     }
+
+    public void updateUser(int id, User updatedUser) {
+        userDAO.updateUser(id, updatedUser);
+    }
+
+    public boolean deleteUser(int id) {
+        userDAO.deleteUser(id);
+        return true;
+    }
 }

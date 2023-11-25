@@ -22,5 +22,4 @@ public class TrainingType {
     @NotEmpty(message = "training's type name should not be empty")
     @Column(name = "training_type_name")
     private String trainingTypeName;
-
 }

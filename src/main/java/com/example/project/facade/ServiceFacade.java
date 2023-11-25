@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ public class ServiceFacade {
     private final UserService userService;
     private final TraineeService traineeService;
     private final TrainingService trainingService;
-    private  final TrainingTypeService trainingTypeService;
+    private final TrainingTypeService trainingTypeService;
 
     public void createTraining(Training training) {
         trainingService.createTraining(training);
@@ -68,6 +69,10 @@ public class ServiceFacade {
 
     public void deleteTraineeByUserName(String userName) {
         traineeService.deleteTraineeByUserName(userName);
+    }
+
+    public void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers) {
+        traineeService.updateTraineeTrainerList(updateTraineeId, trainers);
     }
 
     public List<Training> selectTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria) {
@@ -165,5 +170,4 @@ public class ServiceFacade {
     public void updateTrainingType(int id, TrainingType updatedTraining) {
         trainingTypeService.updateTrainingType(id, updatedTraining);
     }
-
 }
