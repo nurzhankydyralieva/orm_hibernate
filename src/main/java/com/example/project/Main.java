@@ -13,6 +13,9 @@ public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         ServiceFacade facade = context.getBean(ServiceFacade.class);
+        //facade.usersUserNameAndPasswordGenerator();
+        //facade.traineesUserNameAndPasswordGenerator();
+        // facade.trainersUserNameAndPasswordGenerator();
 
         var user = User.builder().firstName("Maxim").lastName("Smith").userName("Toms").password("333").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
         var updatedUser = User.builder().firstName("Katy").lastName("Simson").userName("Moon").password("123").isActive(true).build();

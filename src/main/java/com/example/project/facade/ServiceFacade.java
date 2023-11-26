@@ -18,6 +18,7 @@ public class ServiceFacade {
     private final TraineeService traineeService;
     private final TrainingService trainingService;
     private final TrainingTypeService trainingTypeService;
+    private final PasswordGeneratorService passwordGeneratorService;
 
     public void createTraining(Training training) {
         trainingService.createTraining(training);
@@ -169,5 +170,16 @@ public class ServiceFacade {
 
     public void updateTrainingType(int id, TrainingType updatedTraining) {
         trainingTypeService.updateTrainingType(id, updatedTraining);
+    }
+    public List<User> usersUserNameAndPasswordGenerator() {
+        return passwordGeneratorService.selectAllUsersUserNameAndPassword();
+    }
+
+    public List<Trainer> trainersUserNameAndPasswordGenerator() {
+        return passwordGeneratorService.selectAllTrainersUserNameAndPassword();
+    }
+
+    public List<Trainee> traineesUserNameAndPasswordGenerator() {
+        return passwordGeneratorService.selectAllTraineesUserNameAndPassword();
     }
 }
