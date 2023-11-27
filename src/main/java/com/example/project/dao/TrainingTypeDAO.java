@@ -18,8 +18,6 @@ public class TrainingTypeDAO {
     @Transactional
     public void createTrainingType(TrainingType trainingType) {
         Session session = sessionFactory.getCurrentSession();
-        TrainingType saveTraining = new TrainingType();
-        saveTraining.setTrainingTypeName(trainingType.getTrainingTypeName());
         session.save(trainingType);
         LOGGER.info("Training Type is created");
     }

@@ -34,8 +34,6 @@ public class SpecializationDAO {
     @Transactional
     public void createSpecialization(Specialization specialization) {
         Session session = sessionFactory.getCurrentSession();
-        Specialization speciality = new Specialization();
-        speciality.setSpeciality(specialization.getSpeciality());
         session.save(specialization);
         LOGGER.info("Specialization is created");
     }

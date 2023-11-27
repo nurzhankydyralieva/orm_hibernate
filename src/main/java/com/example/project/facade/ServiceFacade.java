@@ -171,6 +171,7 @@ public class ServiceFacade {
     public void updateTrainingType(int id, TrainingType updatedTraining) {
         trainingTypeService.updateTrainingType(id, updatedTraining);
     }
+
     public List<User> usersUserNameAndPasswordGenerator() {
         return passwordGeneratorService.selectAllUsersUserNameAndPassword();
     }

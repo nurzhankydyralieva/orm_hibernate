@@ -57,9 +57,6 @@ public class TrainerDAO {
     @Transactional
     public void createTrainer(Trainer trainer) {
         Session session = sessionFactory.getCurrentSession();
-        Trainer saveTrainer = new Trainer();
-        saveTrainer.setSpecialization(trainer.getSpecialization());
-        saveTrainer.setUser(trainer.getUser());
         session.save(trainer);
         LOGGER.info("Trainer is created");
     }

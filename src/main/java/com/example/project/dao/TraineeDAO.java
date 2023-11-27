@@ -18,7 +18,7 @@ import java.util.Set;
 @Component
 @RequiredArgsConstructor
 public class TraineeDAO {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrainerDAO.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TraineeDAO.class);
     private final SessionFactory sessionFactory;
 
     @Transactional(readOnly = true)
@@ -48,10 +48,6 @@ public class TraineeDAO {
     @Transactional
     public void createTrainee(Trainee trainee) {
         Session session = sessionFactory.getCurrentSession();
-        Trainee newTrainee = new Trainee();
-        newTrainee.setAddress(trainee.getAddress());
-        newTrainee.setDateOfBirth(trainee.getDateOfBirth());
-        newTrainee.setUser(trainee.getUser());
         session.save(trainee);
         LOGGER.info("Trainee is created");
     }
@@ -78,14 +74,12 @@ public class TraineeDAO {
     }
 
     @Transactional
-    public void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers) {
+    public void updateTraineeTrainerList(Integer traineeId, Set<Trainer> newTrainers) {
         Session session = sessionFactory.getCurrentSession();
-        Integer traineeId = updateTraineeId;
-        Set<Trainer> newTrainers = trainers;
-        Query query = session.createQuery("UPDATE Trainee t SET t.trainers = :newTrainers WHERE t.id = :traineeId");
-        query.setParameter("newTrainers", newTrainers);
-        query.setParameter("traineeId", traineeId);
-        query.executeUpdate();
+        Trainee trainee = session.get(Trainee.class, traineeId);
+        trainee.setTrainers(newTrainers);
+        session.saveOrUpdate(trainee);
+        LOGGER.info("Trainee's trainers list is updated");
     }
 
     @Transactional

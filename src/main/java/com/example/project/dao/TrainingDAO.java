@@ -34,14 +34,6 @@ public class TrainingDAO {
     @Transactional
     public void createTraining(Training training) {
         Session session = sessionFactory.getCurrentSession();
-        Training saveTraining = new Training();
-        saveTraining.setTrainerId(training.getTrainerId());
-        saveTraining.setTraineeId(training.getTraineeId());
-        saveTraining.setTrainingName(training.getTrainingName());
-        saveTraining.setTrainingTypeId(training.getTrainingTypeId());
-        saveTraining.setTrainingDate(training.getTrainingDate());
-        Number number = training.getTrainingDuration();
-        saveTraining.setTrainingDuration(number);
         session.save(training);
         LOGGER.info("Training is created");
     }
