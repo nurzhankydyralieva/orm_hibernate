@@ -146,4 +146,18 @@ public class TraineeDAO {
                 .setParameter("criteria", criteria)
                 .getResultList();
     }
+    @Transactional
+    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
+        Session session = sessionFactory.getCurrentSession();
+        String userNameQuery = "SELECT t FROM Trainee t WHERE t.user.userName =:userNameInput";
+        String passwordInDB = "SELECT t FROM Trainee t WHERE  t.user.password =:passwordInput";
+
+        Object resultUserName = session.createQuery(userNameQuery).setParameter("userNameInput", userNameInput).uniqueResult();
+        Object resultPassword = session.createQuery(passwordInDB).setParameter("passwordInput", passwordInput).uniqueResult();
+        if (resultUserName != null && resultPassword != null) {
+            LOGGER.info("UserName and Password exists in trainee database");
+        } else {
+            LOGGER.info("UserName and Password does not exist in trainee database");
+        }
+    }
 }

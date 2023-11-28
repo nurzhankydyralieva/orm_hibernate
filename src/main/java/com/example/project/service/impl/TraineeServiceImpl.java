@@ -83,8 +83,8 @@ public class TraineeServiceImpl implements TraineeService {
         traineeDAO.updateTraineeTrainerList(updateTraineeId, trainers);
     }
 
-//    @Override
-//    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
-//        traineeDAO.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
-//    }
+    @Override
+    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
+        traineeDAO.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
+    }
 }

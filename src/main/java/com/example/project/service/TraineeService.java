@@ -34,5 +34,5 @@ public interface TraineeService {
 
     void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers);
 
-   // void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
+    void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
 }

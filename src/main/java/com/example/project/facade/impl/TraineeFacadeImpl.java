@@ -89,8 +89,8 @@ public class TraineeFacadeImpl implements TraineeFacade {
         return passwordGeneratorService.selectAllTraineesUserNameAndPassword();
     }
 
-//    @Override
-//    public void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput) {
-//        traineeService.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
-//    }
+    @Override
+    public void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput) {
+        traineeService.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
+    }
 }

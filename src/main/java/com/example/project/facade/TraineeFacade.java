@@ -35,6 +35,6 @@ public interface TraineeFacade {
     Trainee selectUserNameAndPasswordTrainee(String userName, String password);
 
     List<Trainee> traineesUserNameAndPasswordGenerator();
-  //  void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput);
+    void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput);
 
 }
