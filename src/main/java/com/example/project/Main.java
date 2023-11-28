@@ -2,76 +2,87 @@ package com.example.project;
 
 import com.example.project.config.SpringConfig;
 import com.example.project.entity.*;
-import com.example.project.facade.ServiceFacade;
+import com.example.project.facade.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        ServiceFacade facade = context.getBean(ServiceFacade.class);
-        //facade.usersUserNameAndPasswordGenerator();
-        //facade.traineesUserNameAndPasswordGenerator();
-        // facade.trainersUserNameAndPasswordGenerator();
+        UserFacade userFacade = context.getBean(UserFacade.class);
+        TrainingFacade trainingFacade = context.getBean(TrainingFacade.class);
+        TrainerFacade trainerFacade = context.getBean(TrainerFacade.class);
+        TraineeFacade traineeFacade = context.getBean(TraineeFacade.class);
+        SpecializationFacade specializationFacade = context.getBean(SpecializationFacade.class);
 
-        var user = User.builder().firstName("Maxim").lastName("Smith").userName("Toms").password("333").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
+
+        var user = User.builder().firstName("Andre").lastName("Bocelli").userName("Andy").password("222").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
         var updatedUser = User.builder().firstName("Katy").lastName("Simson").userName("Moon").password("123").isActive(true).build();
-        //facade.createUser(user);
-        //facade.selectAllUsers().stream().forEach(System.out::println);
-        //System.out.println(facade.selectUserById(1));
+//        userFacade.createUser(user);
+//        userFacade.selectAllUsers().stream().forEach(System.out::println);
+//        System.out.println(userFacade.selectUserById(1));
+//        userFacade.usersUserNameAndPasswordGenerator();
 
-        var specialization = Specialization.builder().speciality("Physiologic and Psychological Concerns").build();
+
+        var specialization = Specialization.builder().speciality("Concerns Physiologic and Psychological").build();
         var updatedSpecialization = Specialization.builder().speciality("Information technology specializations").build();
-        // facade.createSpecialization(specialization);
-        //facade.selectAllSpecializations().stream().forEach(System.out::println);
-        //System.out.println(facade.selectSpecializationById(1));
-        //facade.updateSpecialization(1, updatedSpecialization);
+//         specializationFacade.createSpecialization(specialization);
+//        specializationFacade.selectAllSpecializations().stream().forEach(System.out::println);
+//        System.out.println(specializationFacade.selectSpecializationById(1));
+//        specializationFacade.updateSpecialization(1, updatedSpecialization);
 
-        var trainer = Trainer.builder().specialization(new Specialization(1)).user(new User(4)).build();
-        var updatedTrainer = Trainer.builder().specialization(new Specialization(2)).user(new User(3)).build();
-        //facade.createTrainer(trainer);
-        //facade.selectAllTrainers();
-        //facade.selectTrainerById(1);
-        //facade.updateTrainer(1, updatedTrainer);
-        //System.out.println(facade.selectTrainerByUserName("Tom"));
-        //facade.deleteTrainerByUserName("Tom");
-        //facade.updateTrainerPassword(1, "8888");
-        //facade.activateTrainer(1);
-        //facade.deactivateTrainer(1);
-        //facade.selectUserNameAndPasswordTrainer("Tom", "333");
-        //facade.selectTrainerTrainingListByTrainerUserNameAndCriteria("Tom", "sport");
-        //System.out.println(facade.selectActiveTrainersList(1));
+        var trainer = Trainer.builder().specialization(new Specialization(2)).user(new User(2)).build();
+        var updatedTrainer = Trainer.builder().specialization(new Specialization(1)).user(new User(1)).build();
+//        trainerFacade.createTrainer(trainer);
+//        trainerFacade.selectAllTrainers().stream().forEach(System.out::println);
+//        System.out.println(facade.selectTrainerById(1));
+//        trainerFacade.updateTrainer(1, updatedTrainer);
+//        System.out.println(trainerFacade.selectTrainerByUserName("Toms"));
+//        trainerFacade.deleteTrainerByUserName("Toms");
+//        trainerFacade.updateTrainerPassword(2, "8888");
+//        trainerFacade.activateTrainer(2);
+//        trainerFacade.deactivateTrainer(2);
+//        trainerFacade.selectUserNameAndPasswordTrainer("Andy", "8888");
+//        trainerFacade.selectTrainerTrainingListByTrainerUserNameAndCriteria("Andy", "Criteria for Selecting Training Modalities");
+//         trainerFacade.trainersUserNameAndPasswordGenerator();
 
-        //Set<Trainer> trainers = new HashSet<>();
-        //trainers.add(Trainer.builder().specialization(new Specialization()).user(new User()).build());
-        //facade.updateTraineeTrainerList(4, trainers);
+        //TODO finish method
+        // System.out.println(trainerFacade.selectActiveTrainersList(1));
 
 
         var training = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Gymnastics")
                 .trainingDate(new Date()).trainingDuration(2).build();
         var updatedTraining = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Swimming")
                 .trainingDate(new Date()).trainingDuration(2).build();
-        //facade.createTraining(training);
-        //facade.selectAllTrainings().stream().forEach(System.out::println);
-        //System.out.println(facade.selectTrainingById(1));
-        //facade.updateTraining(6, updatedTraining);
+//        trainingFacade.createTraining(training);
+//        trainingFacade.selectAllTrainings().stream().forEach(System.out::println);
+//        System.out.println(trainingFacade.selectTrainingById(1));
+//        trainingFacade.updateTraining(1, updatedTraining);
 
-
-        var trainee = Trainee.builder().dateOfBirth(new Date()).address("Kyrgyzstan, Bishkek 33").user(new User(1)).build();
+        var trainee = Trainee.builder().dateOfBirth(new Date()).address("New Mexico, Bishkek 33").user(new User(1)).build();
         var updatedTrainee = Trainee.builder().dateOfBirth(new Date()).address("Mexico").user(new User(3)).build();
-        //facade.createTrainee(trainee);
-        //facade.selectAllTrainees().stream().forEach(System.out::println);
-        // System.out.println(facade.selectTraineeById(2));
-        //facade.updateTrainee(1, updatedTrainee);
-        //System.out.println(facade.selectTraineeByUserName("Katy"));
-        //facade.updateTraineePassword(1,"trainee");
-        //facade.activateTrainee(1);
-        //facade.deactivateTrainee(1);
-        //facade.selectUserNameAndPasswordTrainee("Tom","333");
-        //facade.deleteTraineeByUserName("Tom");
-        //facade.selectTraineeTrainingListByTraineeUserNameAndCriteria("Tom", "sport");
-        //facade.deleteTrainee(3);
+//        traineeFacade.createTrainee(trainee);
+//        traineeFacade.selectAllTrainees().stream().forEach(System.out::println);
+//         System.out.println(traineeFacade.selectTraineeById(2));
+//        traineeFacade.updateTrainee(1, updatedTrainee);
+//        System.out.println(traineeFacade.selectTraineeByUserName("Toms"));
+//        traineeFacade.updateTraineePassword(2,"trainee");
+//        traineeFacade.activateTrainee(2);
+//        traineeFacade.deactivateTrainee(2);
+//        traineeFacade.selectUserNameAndPasswordTrainee("Toms","333");
+//        traineeFacade.deleteTraineeByUserName("Toms");
+//        traineeFacade.selectTraineeTrainingListByTraineeUserNameAndCriteria("Andy", "Criteria for Selecting Training Modalities");
+//        traineeFacade.deleteTrainee(3);
+//        traineeFacade.traineesUserNameAndPasswordGenerator();
+
+        Set<Trainer> trainers = new HashSet<>();
+        trainers.add(Trainer.builder().id(1).build());
+        //TODO
+        //traineeFacade.updateTraineeTrainerList(1, trainers);
+
 
         var trainingType = TrainingType.builder().trainingTypeName("Video-Based Training").build();
         //facade.createTrainingType(trainingType);

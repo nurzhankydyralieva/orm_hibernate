@@ -1,63 +1,34 @@
 package com.example.project.service;
 
-import com.example.project.dao.TrainerDAO;
 import com.example.project.entity.Trainer;
 import com.example.project.entity.Training;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class TrainerService {
-    private final TrainerDAO trainerDAO;
+public interface TrainerService {
+    void createTrainer(Trainer trainer);
 
-    public void createTrainer(Trainer trainer) {
-        trainerDAO.createTrainer(trainer);
-    }
+    List<Trainer> selectAllTrainers();
 
-    public List<Trainer> selectAllTrainers() {
-        return trainerDAO.selectAllTrainers();
-    }
+    Trainer selectTrainerById(int id);
 
-    public Trainer selectTrainerById(int id) {
-        return trainerDAO.showTrainer(id);
-    }
+    void updateTrainer(int id, Trainer updatedTrainer);
 
-    public void updateTrainer(int id, Trainer updatedTrainer) {
-        trainerDAO.updateTrainer(id, updatedTrainer);
-    }
+    Trainer selectTrainerByUserName(String userName);
 
-    public Trainer selectTrainerByUserName(String userName) {
-        return trainerDAO.selectTrainerByUserName(userName);
-    }
+    void deleteTrainerByUserName(String userName);
 
-    public void deleteTrainerByUserName(String userName) {
-        trainerDAO.deleteTrainerByUserName(userName);
-    }
+    void updatePassword(int id, String password);
 
-    public void updatePassword(int id, String password) {
-        trainerDAO.updatePassword(id, password);
-    }
+    void activateTrainer(int id);
 
-    public void activateTrainer(int id) {
-        trainerDAO.activateTrainer(id);
-    }
+    void deactivateTrainer(int id);
 
-    public void deactivateTrainer(int id) {
-        trainerDAO.deactivateTrainer(id);
-    }
+    Trainer selectUserNameAndPassword(String userName, String password);
 
-    public Trainer selectUserNameAndPassword(String userName, String password) {
-        return trainerDAO.selectUserNameAndPassword(userName, password);
-    }
+    List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria);
 
-    public List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria) {
-        return trainerDAO.getTrainerTrainingListByTrainerUserNameAndCriteria(userName, criteria);
-    }
+    List<Trainer> getActiveTrainersList(int id);
+   // void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
 
-    public List<Trainer> getActiveTrainersList(int id) {
-        return trainerDAO.getActiveTrainersList(id);
-    }
 }

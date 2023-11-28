@@ -1,7 +1,7 @@
 package com.example.project.dao;
 
 import com.example.project.entity.Specialization;
-import com.example.project.service.SpecializationService;
+import com.example.project.service.impl.SpecializationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

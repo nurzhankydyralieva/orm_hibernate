@@ -112,7 +112,7 @@ public class TrainerDAO {
         Trainer trainer = (Trainer) userNameAndPassword.uniqueResult();
 
         if (trainer != null) {
-            LOGGER.info("Trainer's user name and password is: " + trainer.getUser().getUserName() + "." + trainer.getUser().getPassword());
+            LOGGER.info("Trainer's user name is: " + trainer.getUser().getUserName() + ", and password is: " + trainer.getUser().getPassword());
         }
         return trainer;
     }

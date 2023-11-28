@@ -1,7 +1,7 @@
 package com.example.project.dao;
 
 import com.example.project.entity.User;
-import com.example.project.service.UserService;
+import com.example.project.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,14 +21,14 @@ class UserDAOTest {
     @Mock
     private UserDAO userDAO;
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
     private User user;
     public List<User> users;
 
     @BeforeEach
     public void setUp() {
         userDAO = mock(UserDAO.class);
-        userService = new UserService(userDAO);
+        userService = new UserServiceImpl(userDAO);
         user = User.builder().firstName("Maxim").lastName("Smith").userName("Toms").password("333").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
         users = Arrays.asList(new User(), new User());
     }

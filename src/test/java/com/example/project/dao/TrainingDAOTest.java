@@ -3,7 +3,7 @@ package com.example.project.dao;
 import com.example.project.entity.Trainee;
 import com.example.project.entity.Trainer;
 import com.example.project.entity.Training;
-import com.example.project.service.TrainingService;
+import com.example.project.service.impl.TrainingServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -23,14 +23,14 @@ class TrainingDAOTest {
     @Mock
     private TrainingDAO trainingDAO;
     @InjectMocks
-    private TrainingService trainingService;
+    private TrainingServiceImpl trainingService;
     private Training training;
     public List<Training> trainings;
 
     @BeforeEach
     public void setUp() {
         trainingDAO = mock(TrainingDAO.class);
-        trainingService = new TrainingService(trainingDAO);
+        trainingService = new TrainingServiceImpl(trainingDAO);
         training = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Dance")
                 .trainingDate(new Date()).trainingDuration(2).build();
         trainings = Arrays.asList(new Training(), new Training());

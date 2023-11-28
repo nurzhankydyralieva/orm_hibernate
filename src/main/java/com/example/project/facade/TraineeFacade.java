@@ -1,4 +1,4 @@
-package com.example.project.service;
+package com.example.project.facade;
 
 import com.example.project.entity.Trainee;
 import com.example.project.entity.Trainer;
@@ -7,7 +7,7 @@ import com.example.project.entity.Training;
 import java.util.List;
 import java.util.Set;
 
-public interface TraineeService {
+public interface TraineeFacade {
     void createTrainee(Trainee trainee);
 
     List<Trainee> selectAllTrainees();
@@ -18,21 +18,23 @@ public interface TraineeService {
 
     Trainee selectTraineeByUserName(String userName);
 
-    void changePassword(int id, String password);
+    void updateTraineePassword(int id, String password);
 
     void activateTrainee(int id);
 
     void deactivateTrainee(int id);
 
-    Trainee selectUserNameAndPassword(String userName, String password);
-
     void deleteTraineeByUserName(String userName);
+
+    void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers);
 
     List<Training> selectTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria);
 
     void deleteTrainee(int id);
 
-    void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers);
+    Trainee selectUserNameAndPasswordTrainee(String userName, String password);
 
-   // void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
+    List<Trainee> traineesUserNameAndPasswordGenerator();
+  //  void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput);
+
 }

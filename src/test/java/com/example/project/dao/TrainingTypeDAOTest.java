@@ -1,16 +1,13 @@
 package com.example.project.dao;
 
 import com.example.project.entity.TrainingType;
-import com.example.project.entity.User;
-import com.example.project.service.TrainingTypeService;
+import com.example.project.service.impl.TrainingTypeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;

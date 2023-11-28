@@ -63,7 +63,7 @@ public class TraineeDAO {
     }
 
     @Transactional
-    public void updatePassword(int id, String password) {
+    public void changePassword(int id, String password) {
         Session session = sessionFactory.getCurrentSession();
         String query = "UPDATE User u SET u.password=:password WHERE u.id =(SELECT t.user.id FROM Trainee t WHERE t.user.id =:id)";
         Query updatedPassword = session.createQuery(query);
@@ -113,7 +113,7 @@ public class TraineeDAO {
         Trainee trainee = (Trainee) userNameAndPassword.uniqueResult();
 
         if (trainee != null) {
-            LOGGER.info("Trainee's user name and password is: " + trainee.getUser().getUserName() + "." + trainee.getUser().getPassword());
+            LOGGER.info("Trainee's user name is: " + trainee.getUser().getUserName() + ", and password is: " + trainee.getUser().getPassword());
         }
         return trainee;
     }

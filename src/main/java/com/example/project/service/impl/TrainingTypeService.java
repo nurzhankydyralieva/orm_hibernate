@@ -1,4 +1,4 @@
-package com.example.project.service;
+package com.example.project.service.impl;
 
 import com.example.project.dao.TrainingTypeDAO;
 import com.example.project.entity.TrainingType;

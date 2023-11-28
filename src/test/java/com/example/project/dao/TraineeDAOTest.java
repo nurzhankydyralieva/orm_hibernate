@@ -2,7 +2,7 @@ package com.example.project.dao;
 
 import com.example.project.entity.Trainee;
 import com.example.project.entity.User;
-import com.example.project.service.TraineeService;
+import com.example.project.service.impl.TraineeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -22,14 +22,14 @@ class TraineeDAOTest {
     @Mock
     private TraineeDAO traineeDAO;
     @InjectMocks
-    private TraineeService traineeService;
+    private TraineeServiceImpl traineeService;
     private Trainee trainee;
     public List<Trainee> trainees;
 
     @BeforeEach
     public void setUp() {
         traineeDAO = mock(TraineeDAO.class);
-        traineeService = new TraineeService(traineeDAO);
+        traineeService = new TraineeServiceImpl(traineeDAO);
         trainee = Trainee.builder().dateOfBirth(new Date()).address("Kyrgyzstan").user(new User(1, "firstName", "lastName", "userName", "password", true, "criteria")).build();
         trainees = Arrays.asList(new Trainee(), new Trainee());
     }
@@ -72,7 +72,7 @@ class TraineeDAOTest {
     void updatePassword() {
         int idToUpdate = 1;
         trainee.setUser(User.builder().password("newPassword").build());
-        traineeService.updatePassword(idToUpdate, "newPassword");
+        traineeService.changePassword(idToUpdate, "newPassword");
         assertEquals("newPassword", trainee.getUser().getPassword());
     }
 
