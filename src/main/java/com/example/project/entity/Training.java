@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.example.project.enums.TrainingType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,10 +33,9 @@ public class Training {
     @NotEmpty(message = "Training name should not be empty")
     @Column(name = "training_name")
     private String trainingName;
-    @NotEmpty(message = "Training type should not be empty")
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "training_type_id")
-    private Set<TrainingType> trainingTypeId;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "training_type")
+    private Set<TrainingType> trainingType;
     @NotEmpty(message = "Training date should not be empty")
     @Column(name = "training_date")
     private Date trainingDate;

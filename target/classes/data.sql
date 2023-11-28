@@ -45,7 +45,7 @@ CREATE TABLE training
     trainee_id        INTEGER,
     trainer_id        INTEGER,
     training_name     VARCHAR(255),
-    training_type_id  INTEGER,
+    training_type  VARCHAR(100),
     training_date     DATE,
     training_duration bytea
 );

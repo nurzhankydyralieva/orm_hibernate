@@ -2,6 +2,7 @@ package com.example.project;
 
 import com.example.project.config.SpringConfig;
 import com.example.project.entity.*;
+import com.example.project.enums.TrainingType;
 import com.example.project.facade.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -50,17 +51,18 @@ public class Main {
 //         trainerFacade.trainersUserNameAndPasswordGenerator();
 
         //TODO finish method
-        // System.out.println(trainerFacade.selectActiveTrainersList(1));
+        //System.out.println(trainerFacade.selectActiveTrainersList(1));
 
-
-        var training = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Gymnastics")
+        Set<TrainingType> types = new HashSet<>();
+        types.add(TrainingType.WEIGHT_TRAINING);
+        var training = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingType(types).trainingName("Gymnastics")
                 .trainingDate(new Date()).trainingDuration(2).build();
-        var updatedTraining = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingName("Swimming")
+        var updatedTraining = Training.builder().traineeId(new Trainee(1)).trainerId(new Trainer(1)).trainingType(types).trainingName("Swimming")
                 .trainingDate(new Date()).trainingDuration(2).build();
 //        trainingFacade.createTraining(training);
 //        trainingFacade.selectAllTrainings().stream().forEach(System.out::println);
-//        System.out.println(trainingFacade.selectTrainingById(1));
-//        trainingFacade.updateTraining(1, updatedTraining);
+//        System.out.println(trainingFacade.selectTrainingById(6));
+        trainingFacade.updateTraining(2, updatedTraining);
 
         var trainee = Trainee.builder().dateOfBirth(new Date()).address("New Mexico, Bishkek 33").user(new User(1)).build();
         var updatedTrainee = Trainee.builder().dateOfBirth(new Date()).address("Mexico").user(new User(3)).build();
@@ -85,7 +87,7 @@ public class Main {
         //traineeFacade.updateTraineeTrainerList(1, trainers);
 
 
-        var trainingType = TrainingType.builder().trainingTypeName("Video-Based Training").build();
+      //  var trainingType = TrainingType.builder().trainingTypeName("Video-Based Training").build();
         //facade.createTrainingType(trainingType);
         //facade.updateTrainingType(2, trainingType);
 
