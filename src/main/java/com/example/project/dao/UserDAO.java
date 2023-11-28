@@ -47,7 +47,7 @@ public class UserDAO {
         userToUpdate.setLastName(updatedUser.getLastName());
         userToUpdate.setUserName(updatedUser.getUserName());
         userToUpdate.setPassword(updatedUser.getPassword());
-        userToUpdate.setActive(updatedUser.isActive());
+        userToUpdate.setIsActive(updatedUser.getIsActive());
         LOGGER.info("User is updated");
     }
 

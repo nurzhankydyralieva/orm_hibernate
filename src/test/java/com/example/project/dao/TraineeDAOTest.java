@@ -80,14 +80,14 @@ class TraineeDAOTest {
     void activateTrainee() {
         int traineeId = 1;
         traineeService.activateTrainee(traineeId);
-        assertTrue(trainee.getUser().isActive());
+        assertTrue(trainee.getUser().getIsActive());
     }
 
     @Test
     void deactivateTrainee() {
         int traineeId = 1;
         traineeService.deactivateTrainee(traineeId);
-        assertTrue(trainee.getUser().isActive());
+        assertTrue(trainee.getUser().getIsActive());
     }
 
     @Test

@@ -81,13 +81,13 @@ class TrainerDAOTest {
     @Test
     void activateTrainer() {
         trainerService.activateTrainer(1);
-        assertTrue(trainer.getUser().isActive());
+        assertTrue(trainer.getUser().getIsActive());
     }
 
     @Test
     void deactivateTrainer() {
         trainerService.deactivateTrainer(1);
-        assertTrue(trainer.getUser().isActive());
+        assertTrue(trainer.getUser().getIsActive());
     }
 
     @Test
@@ -107,6 +107,6 @@ class TrainerDAOTest {
     @Test
     void getActiveTrainersList() {
         trainerService.getActiveTrainersList(1);
-        assertTrue(trainer.getUser().isActive());
+        assertTrue(trainer.getUser().getIsActive());
     }
 }
