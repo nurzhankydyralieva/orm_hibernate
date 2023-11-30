@@ -108,4 +108,10 @@ class TraineeDAOTest {
         traineeService.deleteTrainee(1);
         assertNull(traineeService.selectTraineeById(1));
     }
+
+    @Test
+    void getActiveTrainersList() {
+        traineeService.selectNotAssignedSpecificTraineeActiveList(1);
+        assertTrue(trainee.getUser().getIsActive());
+    }
 }

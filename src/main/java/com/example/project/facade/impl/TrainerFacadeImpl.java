@@ -63,11 +63,6 @@ public class TrainerFacadeImpl implements TrainerFacade {
     }
 
     @Override
-    public List<Trainer> selectActiveTrainersList(int id) {
-        return trainerService.getActiveTrainersList(id);
-    }
-
-    @Override
     public Trainer selectUserNameAndPasswordTrainer(String userName, String password) {
         return trainerService.selectUserNameAndPassword(userName, password);
     }
@@ -83,8 +78,9 @@ public class TrainerFacadeImpl implements TrainerFacade {
     }
 
 
-//    @Override
-//    public void selectUserNameAndPasswordMatchingTrainer(String userNameInput, String passwordInput) {
-//        trainerService.selectUserNameAndPasswordMatching(userNameInput,passwordInput);
-//    }
+    @Override
+    public void selectUserNameAndPasswordMatchingTrainer(String userNameInput, String passwordInput) {
+        trainerService.selectUserNameAndPasswordMatching(userNameInput,passwordInput);
+    }
+
 }

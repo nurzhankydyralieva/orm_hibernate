@@ -5,7 +5,6 @@ import com.example.project.entity.Trainer;
 import com.example.project.entity.Training;
 
 import java.util.List;
-import java.util.Set;
 
 public interface TraineeFacade {
     void createTrainee(Trainee trainee);
@@ -26,7 +25,7 @@ public interface TraineeFacade {
 
     void deleteTraineeByUserName(String userName);
 
-    void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers);
+    void updateTraineeTrainerList(int updateTraineeId, List<Trainer> trainers);
 
     List<Training> selectTraineeTrainingListByTraineeUserNameAndCriteria(String userName, String criteria);
 
@@ -35,6 +34,8 @@ public interface TraineeFacade {
     Trainee selectUserNameAndPasswordTrainee(String userName, String password);
 
     List<Trainee> traineesUserNameAndPasswordGenerator();
+
     void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput);
+    List<Trainee> selectNotAssignedSpecificTraineeActiveList(int id) ;
 
 }

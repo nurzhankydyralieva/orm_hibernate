@@ -130,10 +130,17 @@ public class TrainerDAO {
     }
 
     @Transactional
-    public List<Trainer> getActiveTrainersList(int id) {
+    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
         Session session = sessionFactory.getCurrentSession();
-        String query = "SELECT u FROM User u WHERE u.isActive=true AND u.id =(SELECT t.user.id FROM Trainer t WHERE t.user.id =:id)";
-        return session.createQuery(query, Trainer.class)
-                .setParameter("id", id).getResultList();
+        String userNameQuery = "SELECT t FROM Trainer t WHERE t.user.userName =:userNameInput";
+        String passwordInDB = "SELECT t FROM Trainer t WHERE  t.user.password =:passwordInput";
+
+        Object resultUserName = session.createQuery(userNameQuery).setParameter("userNameInput", userNameInput).uniqueResult();
+        Object resultPassword = session.createQuery(passwordInDB).setParameter("passwordInput", passwordInput).uniqueResult();
+        if (resultUserName != null && resultPassword != null) {
+            LOGGER.info("UserName and Password exists in trainee database");
+        } else {
+            LOGGER.info("UserName and Password does not exist in trainee database");
+        }
     }
 }

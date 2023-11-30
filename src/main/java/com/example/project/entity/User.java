@@ -35,7 +35,6 @@ public class User {
     private Boolean isActive;
     @Column(name = "criteria")
     private String criteria;
-
     public User(Integer id) {
         this.id = id;
     }

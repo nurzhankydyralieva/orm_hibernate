@@ -70,12 +70,9 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public List<Trainer> getActiveTrainersList(int id) {
-        return trainerDAO.getActiveTrainersList(id);
+    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
+        trainerDAO.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
     }
 
-//    @Override
-//    public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
-//        trainerDAO.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
-//    }
+
 }

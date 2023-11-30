@@ -6,6 +6,7 @@ import com.example.project.entity.Training;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -55,9 +55,11 @@ public class TraineeDAO {
     @Transactional
     public void updateTrainee(int id, Trainee updatedTrainee) {
         Session session = sessionFactory.getCurrentSession();
+
         Trainee trainee = session.get(Trainee.class, id);
         trainee.setAddress(updatedTrainee.getAddress());
         trainee.setDateOfBirth(updatedTrainee.getDateOfBirth());
+        trainee.setTrainers(updatedTrainee.getTrainers());
         trainee.setUser(updatedTrainee.getUser());
         LOGGER.info("Trainee is updated");
     }
@@ -71,15 +73,6 @@ public class TraineeDAO {
         updatedPassword.setParameter("password", password);
         updatedPassword.executeUpdate();
         LOGGER.info("Trainee's password is updated");
-    }
-
-    @Transactional
-    public void updateTraineeTrainerList(Integer traineeId, Set<Trainer> newTrainers) {
-        Session session = sessionFactory.getCurrentSession();
-        Trainee trainee = session.get(Trainee.class, traineeId);
-        trainee.setTrainers(newTrainers);
-        session.saveOrUpdate(trainee);
-        LOGGER.info("Trainee's trainers list is updated");
     }
 
     @Transactional
@@ -146,6 +139,7 @@ public class TraineeDAO {
                 .setParameter("criteria", criteria)
                 .getResultList();
     }
+
     @Transactional
     public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
         Session session = sessionFactory.getCurrentSession();
@@ -159,5 +153,28 @@ public class TraineeDAO {
         } else {
             LOGGER.info("UserName and Password does not exist in trainee database");
         }
+    }
+
+    @Transactional
+    public void updateTraineeTrainerList(Integer id, List<Trainer> trainers) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Trainee trainee = session.get(Trainee.class, id);
+
+        if (trainee != null) {
+            trainee.setTrainers(trainers);
+            session.update(trainers);
+        }
+        LOGGER.info("Trainee's trainers list is updated");
+        transaction.commit();
+    }
+    @Transactional
+    public List<Trainee> selectNotAssignedSpecificTraineeActiveList(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "SELECT t FROM Trainee t JOIN Trainer tr ON t.user.id = tr.id WHERE tr.user.isActive = true AND t.isAssigned = false AND tr.id = :id";
+        List<Trainee> result = session.createQuery(hql, Trainee.class)
+                .setParameter("id", id)
+                .list();
+        return result;
     }
 }

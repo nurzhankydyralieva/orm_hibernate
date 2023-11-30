@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -32,10 +31,10 @@ public class Trainer {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "trainer_trainee",
-            joinColumns = @JoinColumn(name = "trainee_id"),
-            inverseJoinColumns = @JoinColumn(name = "trainer_id")
+            joinColumns = @JoinColumn(name = " trainer_id"),
+            inverseJoinColumns = @JoinColumn(name = "trainee_id")
     )
-    private Set<Trainee> trainees;
+    private List<Trainee> trainees;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "trainer_training",

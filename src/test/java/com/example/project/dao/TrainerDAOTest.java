@@ -104,9 +104,4 @@ class TrainerDAOTest {
         assertEquals("criteria", trainer.getUser().getCriteria());
     }
 
-    @Test
-    void getActiveTrainersList() {
-        trainerService.getActiveTrainersList(1);
-        assertTrue(trainer.getUser().getIsActive());
-    }
 }

@@ -6,9 +6,7 @@ import com.example.project.enums.TrainingType;
 import com.example.project.facade.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,14 +17,12 @@ public class Main {
         TraineeFacade traineeFacade = context.getBean(TraineeFacade.class);
         SpecializationFacade specializationFacade = context.getBean(SpecializationFacade.class);
 
-
-        var user = User.builder().firstName("Andre").lastName("Bocelli").userName("Andy").password("222").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
+        var user = User.builder().firstName("Maxim").lastName("Bocelli").userName("max").password("999").isActive(true).criteria("Criteria for Selecting Training Modalities").build();
         var updatedUser = User.builder().firstName("Katy").lastName("Simson").userName("Moon").password("123").isActive(true).build();
-//        userFacade.createUser(user);
+//         userFacade.createUser(user);
 //        userFacade.selectAllUsers().stream().forEach(System.out::println);
 //        System.out.println(userFacade.selectUserById(1));
 //        userFacade.usersUserNameAndPasswordGenerator();
-
 
         var specialization = Specialization.builder().speciality("Concerns Physiologic and Psychological").build();
         var updatedSpecialization = Specialization.builder().speciality("Information technology specializations").build();
@@ -35,11 +31,11 @@ public class Main {
 //        System.out.println(specializationFacade.selectSpecializationById(1));
 //        specializationFacade.updateSpecialization(1, updatedSpecialization);
 
-        var trainer = Trainer.builder().specialization(new Specialization(2)).user(new User(2)).build();
+        var trainer = Trainer.builder().specialization(new Specialization(1)).user(new User(3)).build();
         var updatedTrainer = Trainer.builder().specialization(new Specialization(1)).user(new User(1)).build();
-//        trainerFacade.createTrainer(trainer);
+//           trainerFacade.createTrainer(trainer);
 //        trainerFacade.selectAllTrainers().stream().forEach(System.out::println);
-//        System.out.println(facade.selectTrainerById(1));
+//        System.out.println(trainerFacade.selectTrainerById(1));
 //        trainerFacade.updateTrainer(1, updatedTrainer);
 //        System.out.println(trainerFacade.selectTrainerByUserName("Toms"));
 //        trainerFacade.deleteTrainerByUserName("Toms");
@@ -49,9 +45,8 @@ public class Main {
 //        trainerFacade.selectUserNameAndPasswordTrainer("Andy", "8888");
 //        trainerFacade.selectTrainerTrainingListByTrainerUserNameAndCriteria("Andy", "Criteria for Selecting Training Modalities");
 //         trainerFacade.trainersUserNameAndPasswordGenerator();
+//        trainerFacade.selectUserNameAndPasswordMatchingTrainer("new","222");
 
-        //TODO finish method
-        //System.out.println(trainerFacade.selectActiveTrainersList(1));
 
         Set<TrainingType> types = new HashSet<>();
         types.add(TrainingType.WEIGHT_TRAINING);
@@ -62,10 +57,12 @@ public class Main {
 //        trainingFacade.createTraining(training);
 //        trainingFacade.selectAllTrainings().stream().forEach(System.out::println);
 //        System.out.println(trainingFacade.selectTrainingById(6));
-        trainingFacade.updateTraining(2, updatedTraining);
+//        trainingFacade.updateTraining(2, updatedTraining);
 
-        var trainee = Trainee.builder().dateOfBirth(new Date()).address("New Mexico, Bishkek 33").user(new User(1)).build();
-        var updatedTrainee = Trainee.builder().dateOfBirth(new Date()).address("Mexico").user(new User(3)).build();
+        List<Trainer> trainerSet = new ArrayList<>();
+        trainerSet.add(Trainer.builder().specialization(specialization).user(user).build());
+        var trainee = Trainee.builder().dateOfBirth(new Date()).address("Kyrgyzstan, Bishkek 33").user(new User(2)).trainers(trainerSet).isAssigned(false).build();
+        var updatedTrainee = Trainee.builder().dateOfBirth(new Date()).address("Mexico").user(new User(3)).trainers(trainerSet).build();
 //        traineeFacade.createTrainee(trainee);
 //        traineeFacade.selectAllTrainees().stream().forEach(System.out::println);
 //         System.out.println(traineeFacade.selectTraineeById(2));
@@ -80,17 +77,10 @@ public class Main {
 //        traineeFacade.deleteTrainee(3);
 //        traineeFacade.traineesUserNameAndPasswordGenerator();
 //        traineeFacade.selectUserNameAndPasswordMatchingTrainee("Toms","333");
-
-        Set<Trainer> trainers = new HashSet<>();
-        trainers.add(Trainer.builder().id(1).build());
-        //TODO
-        //traineeFacade.updateTraineeTrainerList(1, trainers);
-
-
-      //  var trainingType = TrainingType.builder().trainingTypeName("Video-Based Training").build();
-        //facade.createTrainingType(trainingType);
-        //facade.updateTrainingType(2, trainingType);
-
+        List<Trainer> trainers = new ArrayList<>();
+        trainers.add(trainer);
+//        traineeFacade.updateTraineeTrainerList(1, trainers);
+//        traineeFacade.selectNotAssignedSpecificTraineeActiveList(2).stream().forEach(System.out::println);
         context.close();
     }
 }

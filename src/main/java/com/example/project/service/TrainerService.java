@@ -28,7 +28,6 @@ public interface TrainerService {
 
     List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria);
 
-    List<Trainer> getActiveTrainersList(int id);
-   // void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
+    void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput);
 
 }

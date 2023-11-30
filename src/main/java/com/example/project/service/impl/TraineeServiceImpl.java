@@ -79,12 +79,16 @@ public class TraineeServiceImpl implements TraineeService {
     }
 
     @Override
-    public void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers) {
+    public void updateTraineeTrainerList(int updateTraineeId, List<Trainer> trainers) {
         traineeDAO.updateTraineeTrainerList(updateTraineeId, trainers);
     }
 
     @Override
     public void selectUserNameAndPasswordMatching(String userNameInput, String passwordInput) {
         traineeDAO.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
+    }
+    @Override
+    public List<Trainee> selectNotAssignedSpecificTraineeActiveList(int id) {
+        return traineeDAO.selectNotAssignedSpecificTraineeActiveList(id);
     }
 }

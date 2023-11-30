@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -33,7 +32,7 @@ public class Trainee {
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "trainees")
-    private Set<Trainer> trainers;
+    private List<Trainer> trainers;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "trainee_training",
@@ -41,6 +40,8 @@ public class Trainee {
             inverseJoinColumns = @JoinColumn(name = "training_id")
     )
     private List<Training> trainings;
+    @Column(name = "is_assigned")
+    private Boolean isAssigned;
 
     public Trainee(Integer id) {
         this.id = id;

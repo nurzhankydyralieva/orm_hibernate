@@ -25,12 +25,11 @@ public interface TrainerFacade {
 
     void deactivateTrainer(int id);
 
-    List<Trainer> selectActiveTrainersList(int id);
-
     Trainer selectUserNameAndPasswordTrainer(String userName, String password);
 
     List<Training> selectTrainerTrainingListByTrainerUserNameAndCriteria(String userName, String criteria);
 
     List<Trainer> trainersUserNameAndPasswordGenerator();
- //   void selectUserNameAndPasswordMatchingTrainer(String userNameInput, String passwordInput);
+    void selectUserNameAndPasswordMatchingTrainer(String userNameInput, String passwordInput);
+
 }

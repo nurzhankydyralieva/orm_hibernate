@@ -65,7 +65,7 @@ public class TraineeFacadeImpl implements TraineeFacade {
     }
 
     @Override
-    public void updateTraineeTrainerList(int updateTraineeId, Set<Trainer> trainers) {
+    public void updateTraineeTrainerList(int updateTraineeId, List<Trainer> trainers) {
         traineeService.updateTraineeTrainerList(updateTraineeId, trainers);
     }
 
@@ -92,5 +92,10 @@ public class TraineeFacadeImpl implements TraineeFacade {
     @Override
     public void selectUserNameAndPasswordMatchingTrainee(String userNameInput, String passwordInput) {
         traineeService.selectUserNameAndPasswordMatching(userNameInput, passwordInput);
+    }
+
+    @Override
+    public List<Trainee> selectNotAssignedSpecificTraineeActiveList(int id) {
+        return traineeService.selectNotAssignedSpecificTraineeActiveList(id);
     }
 }

@@ -1,0 +1,5 @@
+com\example\project\dao\UserDAOTest.class
+com\example\project\dao\TraineeDAOTest.class
+com\example\project\dao\SpecializationDAOTest.class
+com\example\project\dao\TrainerDAOTest.class
+com\example\project\dao\TrainingDAOTest.class

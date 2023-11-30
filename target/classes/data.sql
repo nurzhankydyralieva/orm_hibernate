@@ -35,6 +35,7 @@ CREATE TABLE trainee
     address       VARCHAR(255),
     user_id       INTEGER,
     trainers      VARCHAR(120),
+    is_assigned BOOLEAN,
     trainings     VARCHAR(255)
 );
 
