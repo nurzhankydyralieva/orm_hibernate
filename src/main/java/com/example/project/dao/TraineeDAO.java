@@ -143,7 +143,7 @@ public class TraineeDAO {
     @Transactional
     public void selectUserNameAndPasswordMatching(String userName, String password) {
         Session session = sessionFactory.getCurrentSession();
-        String getUserByUserName = "SELECT t FROM Trainee t WHERE t.user.userName =:userNameInput";
+        String getUserByUserName = "SELECT t FROM Trainee t WHERE t.user.userName =:userName";
 
         Trainee trainee =(Trainee) session.createQuery(getUserByUserName).setParameter("userName", userName).uniqueResult();
 
