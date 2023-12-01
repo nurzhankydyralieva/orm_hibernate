@@ -76,7 +76,7 @@ public class Main {
 //        traineeFacade.selectTraineeTrainingListByTraineeUserNameAndCriteria("Andy", "Criteria for Selecting Training Modalities");
 //        traineeFacade.deleteTrainee(3);
 //        traineeFacade.traineesUserNameAndPasswordGenerator();
-//        traineeFacade.selectUserNameAndPasswordMatchingTrainee("Toms","333");
+        traineeFacade.selectUserNameAndPasswordMatchingTrainee("Toms","333");
         List<Trainer> trainers = new ArrayList<>();
         trainers.add(trainer);
 //        traineeFacade.updateTraineeTrainerList(1, trainers);
